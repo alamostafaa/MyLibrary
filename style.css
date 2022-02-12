@@ -1,0 +1,179 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+body
+{
+  position:relative;
+  background-image: url(background.jpg);
+  background-position: center;
+  background-size: cover;
+  color: #ffff;
+}
+#Backg
+{
+  display: none;
+  position: fixed;
+  padding-top: 100px;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, .6);
+}
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#addBookForm
+{
+  background-color: black;
+  padding: 15px;
+  margin: 5% auto;  
+  width: 25em;
+  height:max-content;
+
+}
+.detail
+{
+  font-size: 21px;
+  display: flex;
+  margin:15px;
+}
+label
+{
+  margin-right:15px ;
+}
+#title input
+{
+  width: 15em;
+  margin-left: 50px;
+}
+
+#Author input
+{
+  width: 15em;
+  margin-left: 25px;
+}
+#numofpages input
+{
+  width: 15em;
+}
+#read-boolean 
+{
+  font-size: 21px;
+  margin:15px;
+}
+#AddNewBook
+{
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  transform: translatex(25em);
+  border-style: none;
+  background: rgba(0, 0, 0, .9);
+  color: #ffff;
+  font-size: 19px;
+  font-weight: bolder;
+  padding: 10px;
+  margin: 2em;
+  margin-top: 5em;
+  border-radius: 30px;
+}
+
+img
+{
+  width: 100px;
+}
+#ConfirmBook
+{
+  
+ font-size: 15px; 
+ border-radius: 15px;
+ padding: 5px;
+ width: 24%;
+ cursor: pointer;
+ transform: translatex(10em);
+ border-style: none;
+ transition: background-color 1s;
+}
+#ConfirmBook:hover
+{
+  background-color: lawngreen;
+  font-weight: bolder;
+}
+.bookshelf
+{
+  position: relative;
+  margin-top: .5em;
+  display: flex;
+  flex-wrap: wrap;
+}
+.book
+{
+  margin: 15px;
+  background-color: rgba(0, 0, 0, .9);
+  width: 12em;
+  height: 17em;
+  padding: 20px;
+}
+.book img
+{
+  transform: translatex(40px);
+}
+.book h1
+{
+  text-align: center;
+}
+.book h3
+{
+  text-align: center;
+}
+.book p
+{
+  font-size: 4em;
+  text-align: center;
+}
+.book h4
+{
+  text-align: center;
+}
+.btns
+{
+  display: flex;
+}
+.DeleteBookbtn
+{
+  font-size: 15px;
+  margin-top:15px ;
+  border-radius: 15px;
+  padding: 5px;
+  width: 50%;
+  cursor: pointer;
+  border-style: none;
+  background-color: red;
+  font-weight: bolder;
+}
+.StateReadbtn
+{
+  font-size: 15px;
+  margin-top:15px ;
+  border-radius: 15px;
+  padding: 5px;
+  width: 50%;
+  cursor: pointer;
+  border-style: none;
+  background-color:lightgreen;
+  font-weight: bolder;
+}
+
+.StateReadbtn:hover
+{
+  background-color:green;
+  transition: 1s;
+}
