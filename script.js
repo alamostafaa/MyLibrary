@@ -1,7 +1,7 @@
 var myLibrary = [];
 var bookShelf = document.getElementsByClassName('bookshelf')[0];
 let books = JSON.parse(localStorage.getItem('Books'))
-let idCounter =  JSON.parse(localStorage.getItem('Counter'))
+let idCounter = 7; window.localStorage.setItem('counter', idCounter)
 
 //Display new book form
 var addBookButton = document.getElementById('AddNewBook');
@@ -140,7 +140,9 @@ const ChangeBookReadStatu =() =>
 }
 
 //add saved bookzz 
-for (let i =0; i<books.length; ++i)
+if (books.length != null)
+{
+  for (let i =0; i<books.length; ++i)
 {
   let book = ` <div class="book" data-id="${books[i].id}">
   <img src="./pngfind.com-book-icon-png-487471.png" alt="" width="100x">
@@ -153,4 +155,6 @@ for (let i =0; i<books.length; ++i)
     <button type="button"  onmouseover="ChangeBookReadStatu()" class="StateReadbtn" id="${books[i].id}">changeRead</button>
   </div>`
   bookShelf.insertAdjacentHTML('beforeend', book); 
+}
+
 }
