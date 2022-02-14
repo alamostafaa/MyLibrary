@@ -1,6 +1,7 @@
 var myLibrary = [];
-var count = localStorage.getItem("counter");
-
+var bookShelf = document.getElementsByClassName('bookshelf')[0];
+let books = JSON.parse(localStorage.getItem('Books'))
+let idCounter =  JSON.parse(localStorage.getItem('Counter'))
 
 //Display new book form
 var addBookButton = document.getElementById('AddNewBook');
@@ -27,30 +28,44 @@ btn.addEventListener('click', AddBookToLibrary = (e) => {
   let bookTitle = document.getElementById('booktitle').value;
   let numberOfPages = document.getElementById('pages').value;
   let readBooks = document.querySelector('input[name="read_Q"]:checked').value;
-  let newBook = new Book(authorName, bookTitle, numberOfPages, readBooks);
-  window.localStorage.setItem(`book${count}`, JSON.stringify(newBook));
-  count++;
+  let newBook = new Book(authorName, bookTitle, numberOfPages, readBooks, idCounter);
+  ++idCounter;
+  myLibrary.push(newBook);
+  window.localStorage.setItem('Books', JSON.stringify(myLibrary));
+  window.localStorage.setItem('Counter', idCounter)
   DisplayBooks(newBook);
 });
 
 
 //constractor 
-function Book(author, title, numOfPages, read) {
+function Book(author, title, numOfPages, read, id) {
   this.author = author;
   this.title = title;
   this.numOfPages = numOfPages;
   this.read = read;
+  this.id = id;
 }
 
+let whatMyState = (emmm) => {
+  if(emmm == "Yes")
+  {
+    return `<h4>you have read it</h4>`
+  }
+  else
+  {
+    return `<h4>you haven't read it yet</h4>`
+  }
+}
+
+
 //Display the new book
-let idCount =7 ;
 const DisplayBooks = (newBook) => {
 
   let bookfrag = new DocumentFragment;
     //Book dev
     let dev = document.createElement('dev');
     dev.classList.add('book');
-    dev.dataset.id = `${idCount}`;
+    dev.dataset.id = `${newBook.id}`;
     //book png
     let img = document.createElement('img');
     img.src = "pngfind.com-book-icon-png-487471.png";
@@ -73,32 +88,24 @@ const DisplayBooks = (newBook) => {
     dev.appendChild(pagges)
     bookfrag.appendChild(dev);
     //read status
-    let status;
-    if(newBook.read == "Yes")
-    {
-      status = `<h4>you have read it</h4>`
-    }
-    else
-    {
-      status = `<h4>you haven't read it yet</h4>`
-    }
+    let status = whatMyState(newBook.read);
+    
     dev.insertAdjacentHTML("beforeend",status);
     
     //Deletebutton
-    let bttn = `<button type="button" onmouseover="Delete()" class="DeleteBookbtn" id="${idCount}">Delete</button>`
+    let bttn = `<button type="button" onmouseover="Delete()" class="DeleteBookbtn" id="${newBook.id}">Delete</button>`
     dev.insertAdjacentHTML("beforeend",bttn);
 
     //Changebutton
-    let Chngbttn =`<button type="button"  onmouseover="ChangeBookReadStatu()" class="StateReadbtn" id="${idCount}">changeRead</button>`
+    let Chngbttn =`<button type="button"  onmouseover="ChangeBookReadStatu()" class="StateReadbtn" id="${newBook.id}">changeRead</button>`
     dev.insertAdjacentHTML("beforeend",Chngbttn);
 
-    idCount++;
     bookfrag.appendChild(dev);
-    document.getElementsByClassName('bookshelf')[0].appendChild(bookfrag);
+    bookShelf.appendChild(bookfrag);
 }
 
 //Delete book
-  let bookShelf = document.getElementsByClassName('bookshelf')[0];
+  
   let Delete = () => {
     let delts = document.querySelectorAll('.DeleteBookbtn');
     delts.forEach((delt) => {
@@ -130,4 +137,20 @@ const ChangeBookReadStatu =() =>
 
     }
   })
+}
+
+//add saved bookzz 
+for (let i =0; i<books.length; ++i)
+{
+  let book = ` <div class="book" data-id="${books[i].id}">
+  <img src="./pngfind.com-book-icon-png-487471.png" alt="" width="100x">
+  <h1>${books[i].title}</h1>
+  <h3>${books[i].author}</h3>
+  <p>${books[i].numOfPages}</p>
+  ${whatMyState(books[i].read)}
+  <div class="btns">
+    <button type="button" onmouseover="Delete()" class="DeleteBookbtn" id="${books[i].id}">Delete</button>
+    <button type="button"  onmouseover="ChangeBookReadStatu()" class="StateReadbtn" id="${books[i].id}">changeRead</button>
+  </div>`
+  bookShelf.insertAdjacentHTML('beforeend', book); 
 }
